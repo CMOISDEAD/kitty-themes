@@ -47,7 +47,9 @@ the previews for each theme in the [section](#previews) below or in this other
 
     ```bash
     cd ~/.config/kitty
-    ln -s ./kitty-themes/themes/Floraverse.conf ~/.config/kitty/theme.conf
+    ln -s ./kitty-themes/themes/gruvbox_dark.conf ~/.config/kitty/theme.conf
+    # Or use
+    ./kitty-colorscheme gruvbox_dark.conf
     ```
 
 3. Add this line to your kitty.conf configuration file:
