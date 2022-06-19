@@ -4,13 +4,22 @@
 kitty_path=$HOME/.config/kitty;
 themes_file=$kitty_path/theme.conf;
 themes_dir=$kitty_path/kitty-themes/themes;
-theme=$(cd "$themes_dir/" && fzf);
+
+if [[ ! -z "$1" ]]; then
+  theme=$1
+else
+  theme=$(cd "$themes_dir/" && fzf);
+fi
 
 # Welcome msg
 echo " KITTY COLORS BY DOOM"
 
-# Checks if theme.conf exists and remove it.
-[[ -f "$themes_file" ]] && { echo " file removed."; rm $themes_file; } || echo "x file dont exist."
-
-# Changing the colorscheme.
-[[ -f "$themes_dir/$theme" ]] && { ln -s "$themes_dir/$theme" $themes_file; kitty @ set-colors -a -c $kitty_path/kitty.conf; echo " colorscheme changed.";  } || echo "!colorscheme dont exist.!"
+# Checks if theme.conf exists.
+if [[ -f "$themes_dir/$theme" ]]; then
+  [[ -f "$themes_file" ]] && { echo " file removed."; rm $themes_file; } || echo "x file dont exist.";
+  ln -s "$themes_dir/$theme" $themes_file;
+  kitty @ set-colors -a -c $kitty_path/kitty.conf;
+  echo " colorscheme changed to $theme.";
+else
+  echo "!colorscheme dont exist.!"
+fi
