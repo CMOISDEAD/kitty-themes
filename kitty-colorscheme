@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# variables
+kitty_path=$HOME/.config/kitty;
+themes_file=$kitty_path/theme.conf;
+themes_dir=$kitty_path/kitty-themes/themes;
+
+# Welcome msg
+echo " KITTY COLORS BY DOOM"
+
+# Checks if theme.conf exists and remove it.
+[[ -f "$themes_file" ]] && { echo " file removed."; rm $themes_file; } || echo "x file dont exist."
+
+# Changing the colorscheme.
+[[ -f "$themes_dir/$1" ]] && { ln -s "$themes_dir/$1" $themes_file; kitty @ set-colors -a -c $kitty_path/kitty.conf; echo " colorscheme changed.";  } || echo "!colorscheme dont exist.!"
